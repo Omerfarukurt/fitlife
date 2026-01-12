@@ -1,0 +1,90 @@
+{
+    "name": "FitLife - Fitness ve Beslenme Asistanı",
+    "short_name": "FitLife",
+    "description": "Kişisel Fitness ve Beslenme Asistanınız. Antrenman takibi, beslenme planı ve AI destekli öneriler.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0f172a",
+    "theme_color": "#f97316",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "tr",
+    "dir": "ltr",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "categories": [
+        "health",
+        "fitness",
+        "lifestyle",
+        "sports"
+    ],
+    "shortcuts": [
+        {
+            "name": "Antrenman",
+            "short_name": "Antrenman",
+            "description": "Antrenman sayfasına git",
+            "url": "/workouts",
+            "icons": [
+                {
+                    "src": "/icon-192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        },
+        {
+            "name": "Beslenme",
+            "short_name": "Beslenme",
+            "description": "Beslenme sayfasına git",
+            "url": "/nutrition",
+            "icons": [
+                {
+                    "src": "/icon-192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        },
+        {
+            "name": "Analiz",
+            "short_name": "Analiz",
+            "description": "Analiz sayfasına git",
+            "url": "/analysis",
+            "icons": [
+                {
+                    "src": "/icon-192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        }
+    ],
+    "screenshots": [],
+    "related_applications": [],
+    "handle_links": "preferred",
+    "launch_handler": {
+        "client_mode": "navigate-existing"
+    }
+}

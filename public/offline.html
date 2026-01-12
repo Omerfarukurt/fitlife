@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f97316">
+    <title>FitLife - Çevrimdışı</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 400px;
+        }
+
+        .icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(249, 115, 22, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .icon svg {
+            width: 60px;
+            height: 60px;
+            stroke: white;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #f97316, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        p {
+            font-size: 16px;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        .retry-btn {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(249, 115, 22, 0.3);
+        }
+
+        .retry-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(249, 115, 22, 0.4);
+        }
+
+        .retry-btn:active {
+            transform: translateY(0);
+        }
+
+        .status {
+            margin-top: 24px;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .status.online {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+        }
+
+        .dumbbell-animation {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .weight {
+            width: 12px;
+            height: 40px;
+            background: #475569;
+            border-radius: 4px;
+            animation: lift 1s ease-in-out infinite;
+        }
+
+        .weight:nth-child(2) {
+            animation-delay: 0.1s;
+            height: 50px;
+        }
+
+        .weight:nth-child(3) {
+            animation-delay: 0.2s;
+            height: 60px;
+        }
+
+        .weight:nth-child(4) {
+            animation-delay: 0.3s;
+            height: 50px;
+        }
+
+        .weight:nth-child(5) {
+            animation-delay: 0.4s;
+            height: 40px;
+        }
+
+        @keyframes lift {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="icon">
+            <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+        </div>
+
+        <h1>Çevrimdışısınız</h1>
+        <p>
+            İnternet bağlantınız yok gibi görünüyor.
+            Bağlantınızı kontrol edip tekrar deneyin.
+        </p>
+
+        <button class="retry-btn" onclick="location.reload()">
+            Tekrar Dene
+        </button>
+
+        <div class="status" id="status">
+            Bağlantı bekleniyor...
+        </div>
+
+        <div class="dumbbell-animation">
+            <div class="weight"></div>
+            <div class="weight"></div>
+            <div class="weight"></div>
+            <div class="weight"></div>
+            <div class="weight"></div>
+        </div>
+    </div>
+
+    <script>
+        // Check online status
+        function updateStatus() {
+            const statusEl = document.getElementById('status');
+            if (navigator.onLine) {
+                statusEl.textContent = '✓ Bağlantı kuruldu! Sayfa yenileniyor...';
+                statusEl.classList.add('online');
+                setTimeout(() => location.reload(), 1500);
+            } else {
+                statusEl.textContent = 'Bağlantı bekleniyor...';
+                statusEl.classList.remove('online');
+            }
+        }
+
+        window.addEventListener('online', updateStatus);
+        window.addEventListener('offline', updateStatus);
+        updateStatus();
+    </script>
+</body>
+
+</html>

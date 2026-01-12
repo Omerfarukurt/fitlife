@@ -1,0 +1,7 @@
+{
+  "name": "FitLife AI",
+  "description": "Gemini destekli kapsamlı fitness takip uygulaması. Akıllı öğün takibi, otomatik makro hesaplama, gelişim karşılaştırmalı günlük antrenman kaydı ve vücut ölçülerinize özel aylık sağlık analizleri içerir.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
