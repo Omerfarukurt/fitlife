@@ -1,6 +1,6 @@
-const CACHE_NAME = 'fitlife-v2';
-const STATIC_CACHE = 'fitlife-static-v2';
-const DYNAMIC_CACHE = 'fitlife-dynamic-v2';
+const CACHE_NAME = 'fitforge-v1';
+const STATIC_CACHE = 'fitforge-static-v1';
+const DYNAMIC_CACHE = 'fitforge-dynamic-v1';
 
 // Core files to cache immediately
 const STATIC_ASSETS = [
@@ -148,7 +148,7 @@ self.addEventListener('push', (event) => {
     };
 
     event.waitUntil(
-        self.registration.showNotification('FitLife', options)
+        self.registration.showNotification('FitForge', options)
     );
 });
 

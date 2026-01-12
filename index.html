@@ -1,58 +1,59 @@
 <!DOCTYPE html>
 <html lang="tr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    
-    <!-- PWA Meta Tags -->
-    <meta name="theme-color" content="#f97316" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="FitLife" />
-    <meta name="description" content="Kişisel Fitness ve Beslenme Asistanı" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    
-    <!-- Icons -->
-    <link rel="icon" type="image/png" href="/icon-192.png" />
-    <link rel="apple-touch-icon" href="/icon-192.png" />
-    
-    <!-- Manifest -->
-    <link rel="manifest" href="/manifest.json" />
-    
-    <title>FitLife</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            },
-            colors: {
-              primary: '#4f46e5',
-              secondary: '#10b981',
-              dark: '#0f172a',
-            },
-            animation: {
-                'bounce-short': 'bounce 1s infinite 2',
-                'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                'snow': 'snowfall 5s linear infinite',
-            },
-            keyframes: {
-                snowfall: {
-                    '0%': { transform: 'translateY(-10px)', opacity: 0 },
-                    '10%': { opacity: 1 },
-                    '90%': { opacity: 1 },
-                    '100%': { transform: 'translateY(200px)', opacity: 0 }
-                }
-            }
 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <!-- PWA Meta Tags -->
+  <meta name="theme-color" content="#f97316" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="FitForge" />
+  <meta name="description" content="Kişisel Fitness ve Beslenme Asistanı - FitForge" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <!-- Icons -->
+  <link rel="icon" type="image/png" href="/icon-192.png" />
+  <link rel="apple-touch-icon" href="/icon-192.png" />
+
+  <!-- Manifest -->
+  <link rel="manifest" href="/manifest.json" />
+
+  <title>FitForge</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            primary: '#4f46e5',
+            secondary: '#10b981',
+            dark: '#0f172a',
+          },
+          animation: {
+            'bounce-short': 'bounce 1s infinite 2',
+            'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'snow': 'snowfall 5s linear infinite',
+          },
+          keyframes: {
+            snowfall: {
+              '0%': { transform: 'translateY(-10px)', opacity: 0 },
+              '10%': { opacity: 1 },
+              '90%': { opacity: 1 },
+              '100%': { transform: 'translateY(200px)', opacity: 0 }
+            }
           }
+
         }
       }
-    </script>
+    }
+  </script>
   <script type="importmap">
 {
   "imports": {
@@ -66,25 +67,27 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="/index.css">
 </head>
-  <body>
-    <div id="root"></div>
+
+<body>
+  <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
-  
+
   <!-- Service Worker Registration -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
           .then((registration) => {
-            console.log('FitLife SW registered:', registration.scope);
+            console.log('FitForge SW registered:', registration.scope);
           })
           .catch((error) => {
-            console.log('FitLife SW registration failed:', error);
+            console.log('FitForge SW registration failed:', error);
           });
       });
     }
   </script>
 </body>
+
 </html>

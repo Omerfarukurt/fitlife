@@ -1,7 +1,7 @@
 {
-    "name": "FitLife - Fitness ve Beslenme Asistanı",
-    "short_name": "FitLife",
-    "description": "Kişisel Fitness ve Beslenme Asistanınız. Antrenman takibi, beslenme planı ve AI destekli öneriler.",
+    "name": "FitForge - Fitness ve Beslenme Asistanı",
+    "short_name": "FitForge",
+    "description": "Kişisel Fitness ve Beslenme Asistanınız. Antrenman takibi, beslenme planı ve akıllı öneriler.",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#0f172a",
