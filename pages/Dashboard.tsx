@@ -555,14 +555,14 @@ const Dashboard: React.FC<DashboardProps> = ({ user, setUser, logs, workoutLogs,
     const waterProgress = 0; // TODO: Eğer water state müsaitse kullanılabilir
 
     return (
-        <div className="pb-24 pt-4 px-4 max-w-2xl mx-auto overflow-x-hidden">
+        <div className="pb-24 pt-2 sm:pt-4 px-2 sm:px-4 max-w-2xl mx-auto overflow-x-hidden">
 
             {/* Bento Grid Layout */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-2 sm:gap-4">
 
 
                 {/* HERO SECTION - Dynamic 4-Phase Theme */}
-                <div className={`col-span-2 relative rounded-xl p-6 text-white shadow-xl overflow-hidden border transition-all duration-700 bg-gradient-to-br ${getTimeBasedBackground()}`}>
+                <div className={`col-span-2 relative rounded-xl p-4 sm:p-6 text-white shadow-xl overflow-hidden border transition-all duration-700 bg-gradient-to-br ${getTimeBasedBackground()}`}>
 
                     {/* Phase-Specific Sky Effects */}
                     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -750,28 +750,28 @@ const Dashboard: React.FC<DashboardProps> = ({ user, setUser, logs, workoutLogs,
 
                     {/* MAIN CONTENT */}
                     <div className="relative z-10">
-                        {/* Top Bar */}
-                        <div className="flex justify-between items-start mb-6">
+                        {/* Top Bar - Mobile Responsive */}
+                        <div className="flex flex-wrap justify-between items-start mb-4 gap-2">
                             {/* Clock & Date with dark background for readability */}
-                            <div className="bg-black/50 backdrop-blur-sm px-4 py-3 rounded-xl">
-                                {/* Clock */}
-                                <h1 className="text-5xl font-black tracking-tight mb-1 text-white">
+                            <div className="bg-black/50 backdrop-blur-sm px-3 py-2 rounded-xl flex-shrink-0">
+                                {/* Clock - Smaller on mobile */}
+                                <h1 className="text-3xl sm:text-5xl font-black tracking-tight mb-1 text-white">
                                     {time.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })}
-                                    <span className="text-xl ml-2 text-slate-300">
+                                    <span className="text-sm sm:text-xl ml-1 sm:ml-2 text-slate-300">
                                         :{time.toLocaleTimeString('tr-TR', { second: '2-digit' })}
                                     </span>
                                 </h1>
-                                <p className="text-sm font-semibold text-slate-200">
+                                <p className="text-xs sm:text-sm font-semibold text-slate-200">
                                     {time.toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long' })}
                                 </p>
                             </div>
 
-                            <div className="flex items-center gap-3">
-                                {/* Temperature Thermometer */}
+                            <div className="flex items-center gap-2 flex-shrink-0">
+                                {/* Temperature Thermometer - Compact on mobile */}
                                 {weather && (
-                                    <div className="bg-black/50 backdrop-blur-sm px-4 py-2 rounded-xl flex items-center gap-3">
-                                        {/* SVG Thermometer */}
-                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" className="flex-shrink-0">
+                                    <div className="bg-black/50 backdrop-blur-sm px-2 sm:px-4 py-2 rounded-xl flex items-center gap-2">
+                                        {/* SVG Thermometer - Smaller on mobile */}
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="flex-shrink-0 sm:w-8 sm:h-8">
                                             <rect x="10" y="3" width="4" height="14" rx="2" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
                                             <circle cx="12" cy="19" r="3.5" fill={weather.temp < 10 ? '#60a5fa' : weather.temp < 20 ? '#34d399' : weather.temp < 30 ? '#fbbf24' : '#ef4444'} />
                                             <rect
@@ -784,8 +784,8 @@ const Dashboard: React.FC<DashboardProps> = ({ user, setUser, logs, workoutLogs,
                                             />
                                         </svg>
                                         <div>
-                                            <div className="text-2xl font-bold text-white">{Math.round(weather.temp)}°</div>
-                                            <div className="text-[9px] uppercase text-slate-300">
+                                            <div className="text-lg sm:text-2xl font-bold text-white">{Math.round(weather.temp)}°</div>
+                                            <div className="text-[8px] sm:text-[9px] uppercase text-slate-300 hidden sm:block">
                                                 {weather.city}
                                             </div>
                                         </div>
@@ -793,41 +793,41 @@ const Dashboard: React.FC<DashboardProps> = ({ user, setUser, logs, workoutLogs,
                                 )}
                                 <button
                                     onClick={toggleTheme}
-                                    className="bg-black/50 backdrop-blur-sm p-3 rounded-xl transition-all hover:bg-black/60"
+                                    className="bg-black/50 backdrop-blur-sm p-2 sm:p-3 rounded-xl transition-all hover:bg-black/60 flex-shrink-0"
                                     title={isDarkMode ? 'Açık Mod' : 'Karanlık Mod'}
                                 >
-                                    {isDarkMode ? <Sun size={20} className="text-yellow-400" /> : <Moon size={20} className="text-white" />}
+                                    {isDarkMode ? <Sun size={18} className="text-yellow-400" /> : <Moon size={18} className="text-white" />}
                                 </button>
                             </div>
                         </div>
 
-                        {/* Bottom Bar - User & Stats */}
-                        <div className="flex justify-between items-center pt-4 gap-3">
+                        {/* Bottom Bar - User & Stats - Mobile Responsive */}
+                        <div className="flex flex-wrap justify-between items-center pt-3 gap-2">
                             {/* User greeting with dark background */}
                             <div
-                                className="cursor-pointer group flex items-center gap-3 bg-black/50 backdrop-blur-sm px-4 py-3 rounded-xl transition-all hover:bg-black/60"
+                                className="cursor-pointer group flex items-center gap-2 bg-black/50 backdrop-blur-sm px-3 py-2 rounded-xl transition-all hover:bg-black/60"
                                 onClick={() => setIsEditingProfile(true)}
                             >
-                                <div className="bg-violet-500/30 p-2 rounded-lg">
-                                    <User size={18} className="text-violet-400" />
+                                <div className="bg-violet-500/30 p-1.5 sm:p-2 rounded-lg">
+                                    <User size={16} className="text-violet-400" />
                                 </div>
                                 <div>
-                                    <p className="text-[10px] uppercase font-bold text-slate-300">Merhaba</p>
-                                    <h2 className="text-lg font-bold text-white">
+                                    <p className="text-[9px] sm:text-[10px] uppercase font-bold text-slate-300">Merhaba</p>
+                                    <h2 className="text-sm sm:text-lg font-bold text-white">
                                         <ShinyText text={user.name} disabled={false} speed={3} className="" />
                                     </h2>
                                 </div>
                             </div>
 
                             {/* Calorie stats with dark background */}
-                            <div className="bg-black/50 backdrop-blur-sm px-4 py-3 rounded-xl">
+                            <div className="bg-black/50 backdrop-blur-sm px-3 py-2 rounded-xl">
                                 <div className="text-right">
-                                    <div className="text-[10px] uppercase font-bold mb-1 text-slate-300">Günlük Kalori</div>
+                                    <div className="text-[9px] sm:text-[10px] uppercase font-bold mb-1 text-slate-300">Günlük Kalori</div>
                                     <div className="flex items-baseline gap-1 justify-end">
-                                        <span className="text-2xl font-black text-white">{Math.round(todayCalories)}</span>
-                                        <span className="text-sm text-slate-300">/ {user.targetCalories}</span>
+                                        <span className="text-xl sm:text-2xl font-black text-white">{Math.round(todayCalories)}</span>
+                                        <span className="text-xs sm:text-sm text-slate-300">/ {user.targetCalories}</span>
                                     </div>
-                                    <div className="mt-1 w-32 rounded-full h-1.5 overflow-hidden bg-slate-700">
+                                    <div className="mt-1 w-20 sm:w-32 rounded-full h-1.5 overflow-hidden bg-slate-700">
                                         <div
                                             className="h-full transition-all duration-500 bg-gradient-to-r from-violet-500 to-purple-500"
                                             style={{ width: `${Math.min((todayCalories / user.targetCalories) * 100, 100)}%` }}
@@ -864,53 +864,53 @@ const Dashboard: React.FC<DashboardProps> = ({ user, setUser, logs, workoutLogs,
                 </div>
 
                 {/* COMPACT BODY STATS CARD - Half Width (BMI + BMR + TDEE combined) */}
-                <div className="col-span-1 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-4 shadow-sm relative group">
-                    <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 mb-3">
-                        <Activity size={16} className="text-teal-600 dark:text-teal-400" />
-                        <span className="text-xs font-bold uppercase tracking-wide">Vücut İstatistikleri</span>
+                <div className="col-span-1 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-3 sm:p-4 shadow-sm relative group">
+                    <div className="flex items-center gap-1 sm:gap-2 text-slate-500 dark:text-slate-400 mb-2 sm:mb-3">
+                        <Activity size={14} className="text-teal-600 dark:text-teal-400 flex-shrink-0" />
+                        <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wide truncate">Vücut İstatistikleri</span>
                         {/* Info Icon with Tooltip */}
-                        <div className="relative ml-auto">
+                        <div className="relative ml-auto flex-shrink-0">
                             <button className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
-                                <Info size={14} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300" />
+                                <Info size={12} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300" />
                             </button>
                             {/* Tooltip Popup */}
-                            <div className="absolute right-0 top-8 w-64 bg-slate-900 dark:bg-slate-800 text-white text-xs rounded-xl p-4 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                                <div className="space-y-3">
+                            <div className="absolute right-0 top-8 w-56 sm:w-64 bg-slate-900 dark:bg-slate-800 text-white text-xs rounded-xl p-3 sm:p-4 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                                <div className="space-y-2 sm:space-y-3">
                                     <div>
                                         <p className="font-bold text-teal-400">BMI (Vücut Kitle İndeksi)</p>
-                                        <p className="text-slate-300">Kilonuzun boyunuza göre ideal aralıkta olup olmadığını gösteren değer.</p>
+                                        <p className="text-slate-300 text-[10px] sm:text-xs">Kilonuzun boyunuza göre ideal aralıkta olup olmadığını gösteren değer.</p>
                                     </div>
                                     <div>
                                         <p className="font-bold text-orange-400">BMR (Bazal Metabolizma)</p>
-                                        <p className="text-slate-300">Vücudunuzun dinlenirken harcadığı günlük minimum kalori miktarı.</p>
+                                        <p className="text-slate-300 text-[10px] sm:text-xs">Vücudunuzun dinlenirken harcadığı günlük minimum kalori miktarı.</p>
                                     </div>
                                     <div>
                                         <p className="font-bold text-purple-400">TDEE (Günlük Enerji İhtiyacı)</p>
-                                        <p className="text-slate-300">Aktivite seviyenize göre günlük toplam kalori ihtiyacınız.</p>
+                                        <p className="text-slate-300 text-[10px] sm:text-xs">Aktivite seviyenize göre günlük toplam kalori ihtiyacınız.</p>
                                     </div>
                                 </div>
                                 <div className="absolute -top-2 right-4 w-4 h-4 bg-slate-900 dark:bg-slate-800 rotate-45"></div>
                             </div>
                         </div>
                     </div>
-                    <div className="grid grid-cols-3 gap-3">
+                    <div className="grid grid-cols-3 gap-1 sm:gap-3">
                         {/* BMI */}
                         <div className="text-center">
-                            <span className="text-2xl font-black text-slate-800 dark:text-slate-100">{bmi}</span>
-                            <p className="text-[9px] text-slate-400 mt-0.5">BMI</p>
-                            <span className={`text-[8px] font-bold ${bmiColor}`}>{bmiStatus}</span>
+                            <span className="text-lg sm:text-2xl font-black text-slate-800 dark:text-slate-100">{bmi}</span>
+                            <p className="text-[8px] sm:text-[9px] text-slate-400 mt-0.5">BMI</p>
+                            <span className={`text-[7px] sm:text-[8px] font-bold ${bmiColor}`}>{bmiStatus}</span>
                         </div>
                         {/* BMR */}
                         <div className="text-center border-x border-slate-100 dark:border-slate-700">
-                            <span className="text-2xl font-black text-slate-800 dark:text-slate-100">{bmr}</span>
-                            <p className="text-[9px] text-slate-400 mt-0.5">BMR</p>
-                            <span className="text-[8px] text-slate-500">kcal</span>
+                            <span className="text-lg sm:text-2xl font-black text-slate-800 dark:text-slate-100">{bmr}</span>
+                            <p className="text-[8px] sm:text-[9px] text-slate-400 mt-0.5">BMR</p>
+                            <span className="text-[7px] sm:text-[8px] text-slate-500">kcal</span>
                         </div>
                         {/* TDEE */}
                         <div className="text-center">
-                            <span className="text-2xl font-black text-slate-800 dark:text-slate-100">{tdee}</span>
-                            <p className="text-[9px] text-slate-400 mt-0.5">TDEE</p>
-                            <span className="text-[8px] text-slate-500">kcal</span>
+                            <span className="text-lg sm:text-2xl font-black text-slate-800 dark:text-slate-100">{tdee}</span>
+                            <p className="text-[8px] sm:text-[9px] text-slate-400 mt-0.5">TDEE</p>
+                            <span className="text-[7px] sm:text-[8px] text-slate-500">kcal</span>
                         </div>
                     </div>
                 </div>

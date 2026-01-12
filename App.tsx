@@ -133,23 +133,64 @@ const App: React.FC = () => {
     setTimeout(() => setIsConfettiActive(false), 3000);
   }, []);
 
-  // --- Default State (Reset on Reload) ---
-  const [user, setUser] = useState<UserProfile>(DEFAULT_USER);
-  const [mealLogs, setMealLogs] = useState<MealLog[]>([]);
-  const [workoutLogs, setWorkoutLogs] = useState<WorkoutLog[]>([]);
-  const [weightLogs, setWeightLogs] = useState<WeightLog[]>([]);
-  const [weeklyProgram, setWeeklyProgram] = useState<WeeklyProgram>(DEFAULT_PROGRAM);
-  const [energyLogs, setEnergyLogs] = useState<DailyEnergy[]>([]);
-  const [personalRecords, setPersonalRecords] = useState<PersonalRecord[]>([]);
+  // --- Persistent State (Load from localStorage) ---
+  const [user, setUser] = useState<UserProfile>(() => {
+    const saved = localStorage.getItem('fitlife_user');
+    return saved ? JSON.parse(saved) : DEFAULT_USER;
+  });
+  const [mealLogs, setMealLogs] = useState<MealLog[]>(() => {
+    const saved = localStorage.getItem('fitlife_mealLogs');
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [workoutLogs, setWorkoutLogs] = useState<WorkoutLog[]>(() => {
+    const saved = localStorage.getItem('fitlife_workoutLogs');
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [weightLogs, setWeightLogs] = useState<WeightLog[]>(() => {
+    const saved = localStorage.getItem('fitlife_weightLogs');
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [weeklyProgram, setWeeklyProgram] = useState<WeeklyProgram>(() => {
+    const saved = localStorage.getItem('fitlife_weeklyProgram');
+    return saved ? JSON.parse(saved) : DEFAULT_PROGRAM;
+  });
+  const [energyLogs, setEnergyLogs] = useState<DailyEnergy[]>(() => {
+    const saved = localStorage.getItem('fitlife_energyLogs');
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [personalRecords, setPersonalRecords] = useState<PersonalRecord[]>(() => {
+    const saved = localStorage.getItem('fitlife_personalRecords');
+    return saved ? JSON.parse(saved) : [];
+  });
 
-  // Force reset on mount
+  // --- Save to localStorage when data changes ---
   useEffect(() => {
-    console.log("App mounted. Clearing storage for fresh session.");
-    localStorage.clear();
-  }, []);
+    localStorage.setItem('fitlife_user', JSON.stringify(user));
+  }, [user]);
 
+  useEffect(() => {
+    localStorage.setItem('fitlife_mealLogs', JSON.stringify(mealLogs));
+  }, [mealLogs]);
 
-  // --- No Persistence Effects ---
+  useEffect(() => {
+    localStorage.setItem('fitlife_workoutLogs', JSON.stringify(workoutLogs));
+  }, [workoutLogs]);
+
+  useEffect(() => {
+    localStorage.setItem('fitlife_weightLogs', JSON.stringify(weightLogs));
+  }, [weightLogs]);
+
+  useEffect(() => {
+    localStorage.setItem('fitlife_weeklyProgram', JSON.stringify(weeklyProgram));
+  }, [weeklyProgram]);
+
+  useEffect(() => {
+    localStorage.setItem('fitlife_energyLogs', JSON.stringify(energyLogs));
+  }, [energyLogs]);
+
+  useEffect(() => {
+    localStorage.setItem('fitlife_personalRecords', JSON.stringify(personalRecords));
+  }, [personalRecords]);
 
 
   useEffect(() => {
