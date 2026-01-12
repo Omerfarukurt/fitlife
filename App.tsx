@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import InstallPWA from './components/InstallPWA';
@@ -308,6 +309,7 @@ const App: React.FC = () => {
         </Routes>
         <Navigation isDarkMode={isDarkMode} />
         <InstallPWA />
+        <Analytics />
       </div>
     </Router>
   );
