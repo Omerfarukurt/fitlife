@@ -144,24 +144,8 @@ const Dashboard: React.FC<DashboardProps> = ({ user, setUser, logs, workoutLogs,
     const [suggestion, setSuggestion] = useState<DailySuggestion | null>(null);
     const [loading, setLoading] = useState(true);
     const [isEditingProfile, setIsEditingProfile] = useState(false);
-    const [isWeeklyReportOpen, setIsWeeklyReportOpen] = useState(false);
     const [activeTab, setActiveTab] = useState<'general' | 'activity'>('general');
     const [formErrors, setFormErrors] = useState<string[]>([]);
-
-    // Daily Motivation Quote - changes daily based on date
-    const dailyQuote = useMemo(() => {
-        const today = new Date();
-        const dayOfYear = Math.floor((today.getTime() - new Date(today.getFullYear(), 0, 0).getTime()) / 86400000);
-        return MOTIVATION_QUOTES[dayOfYear % MOTIVATION_QUOTES.length];
-    }, []);
-
-    // Today's Workout
-    const todaysWorkout = useMemo(() => {
-        const today = new Date();
-        const dayName = DAYS[today.getDay()];
-        const exercises = weeklyProgram?.[dayName] || [];
-        return { dayName, exercises, isRestDay: exercises.length === 0 };
-    }, [weeklyProgram]);
 
     // Daily Challenge State - Smart Selection
     const [dailyChallenge, setDailyChallenge] = useState(() => {
@@ -1272,80 +1256,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user, setUser, logs, workoutLogs,
                 )}
             </div>
 
-            {/* === HAFTALIK RAPOR MODAL === */}
-            {isWeeklyReportOpen && (
-                <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setIsWeeklyReportOpen(false)}>
-                    <div
-                        className="rounded-3xl p-6 max-w-md w-full text-white relative overflow-hidden shadow-2xl"
-                        style={{ backgroundColor: '#0d9488' }}
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        {/* Close button */}
-                        <button
-                            onClick={(e) => { e.stopPropagation(); setIsWeeklyReportOpen(false); }}
-                            className="absolute top-4 right-4 bg-white/20 hover:bg-white/30 p-2 rounded-full transition-colors z-20"
-                        >
-                            <X size={18} />
-                        </button>
-
-                        <div className="absolute top-0 right-0 opacity-10">
-                            <Sparkles size={120} />
-                        </div>
-
-                        <div className="relative z-10">
-                            <div className="flex items-center gap-2 mb-4">
-                                <TrendingUp size={24} />
-                                <h3 className="font-bold text-xl">Haftalık Rapor</h3>
-                            </div>
-                            <p className="text-indigo-200 text-sm mb-5">Bu haftaki performansın özeti</p>
-
-                            {/* Protein mesajı */}
-                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 mb-4">
-                                <p className="text-base font-medium mb-2">{weeklyReport.proteinMessage}</p>
-                                <div className="h-3 bg-white/20 rounded-full overflow-hidden">
-                                    <div
-                                        className="h-full bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-500"
-                                        style={{ width: `${weeklyReport.proteinPercentage}%` }}
-                                    />
-                                </div>
-                                <p className="text-xs text-teal-100 mt-1">%{weeklyReport.proteinPercentage} tamamlandı</p>
-                            </div>
-
-                            {/* Antrenman dengesi */}
-                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 mb-4">
-                                <div className="flex items-center gap-2">
-                                    <Dumbbell size={18} />
-                                    <p className="text-sm font-medium">{weeklyReport.leastWorkedMessage}</p>
-                                </div>
-                                <p className="text-xs text-teal-100 mt-1">Bu hafta {weeklyReport.workoutCount} antrenman yapıldı</p>
-                            </div>
-
-                            {/* Odak noktaları */}
-                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
-                                <p className="text-xs font-bold uppercase tracking-wide mb-3 text-teal-100">
-                                    🎯 Gelecek Hafta Odak Noktaları
-                                </p>
-                                <div className="space-y-2">
-                                    {weeklyReport.focusPoints.map((point, i) => (
-                                        <div key={i} className="flex items-center gap-3 bg-white/5 rounded-lg p-2">
-                                            <ChevronRight size={16} className="text-emerald-400 flex-shrink-0" />
-                                            <span className="text-sm">{point}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Kapat butonu */}
-                            <button
-                                onClick={() => setIsWeeklyReportOpen(false)}
-                                className="w-full mt-5 bg-white/20 hover:bg-white/30 py-3 rounded-xl font-bold transition-colors"
-                            >
-                                Tamam
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
+            {/* Weekly Report Modal - Removed */}
 
         </div>
     );
