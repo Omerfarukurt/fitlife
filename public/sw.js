@@ -1,6 +1,6 @@
-const CACHE_NAME = 'fitforge-v1';
-const STATIC_CACHE = 'fitforge-static-v1';
-const DYNAMIC_CACHE = 'fitforge-dynamic-v1';
+const CACHE_NAME = 'fitforge-v2';
+const STATIC_CACHE = 'fitforge-static-v2';
+const DYNAMIC_CACHE = 'fitforge-dynamic-v2';
 
 // Core files to cache immediately
 const STATIC_ASSETS = [
@@ -49,7 +49,7 @@ self.addEventListener('activate', (event) => {
     self.clients.claim();
 });
 
-// Fetch event - Network first, fallback to cache
+// Fetch event - Network first for HTML/JS, cache for static assets
 self.addEventListener('fetch', (event) => {
     const { request } = event;
     const url = new URL(request.url);
@@ -72,8 +72,29 @@ self.addEventListener('fetch', (event) => {
         return;
     }
 
-    // For static assets - cache first
-    if (STATIC_ASSETS.some(asset => url.pathname === asset || url.pathname.endsWith(asset))) {
+    // For HTML and JS files - ALWAYS network first (no caching to prevent stale deployments)
+    if (url.pathname.endsWith('.html') || url.pathname.endsWith('.js') || url.pathname === '/' || url.pathname.includes('/assets/')) {
+        event.respondWith(
+            fetch(request)
+                .then((response) => {
+                    return response;
+                })
+                .catch(() => {
+                    // Only fallback to cache if offline
+                    return caches.match(request).then((cachedResponse) => {
+                        if (cachedResponse) return cachedResponse;
+                        if (request.mode === 'navigate') {
+                            return caches.match('/offline.html');
+                        }
+                        return new Response('Offline', { status: 503 });
+                    });
+                })
+        );
+        return;
+    }
+
+    // For images and static assets - cache first
+    if (url.pathname.endsWith('.png') || url.pathname.endsWith('.jpg') || url.pathname.endsWith('.css') || url.pathname.endsWith('.json')) {
         event.respondWith(
             caches.match(request).then((cachedResponse) => {
                 if (cachedResponse) {
@@ -93,29 +114,12 @@ self.addEventListener('fetch', (event) => {
         return;
     }
 
-    // For everything else - network first, cache fallback
+    // For everything else - network first
     event.respondWith(
         fetch(request)
-            .then((response) => {
-                // Clone and cache successful responses
-                if (response && response.status === 200 && response.type === 'basic') {
-                    const responseClone = response.clone();
-                    caches.open(DYNAMIC_CACHE).then((cache) => {
-                        cache.put(request, responseClone);
-                    });
-                }
-                return response;
-            })
             .catch(() => {
-                // Try cache
                 return caches.match(request).then((cachedResponse) => {
-                    if (cachedResponse) {
-                        return cachedResponse;
-                    }
-                    // Return offline page for navigation requests
-                    if (request.mode === 'navigate') {
-                        return caches.match('/offline.html');
-                    }
+                    if (cachedResponse) return cachedResponse;
                     return new Response('Offline', { status: 503 });
                 });
             })
